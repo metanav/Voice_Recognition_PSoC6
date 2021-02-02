@@ -1,0 +1,2 @@
+../mtb_shared/capsense/latest-v2.X/COMPONENT_SOFTFP/TOOLCHAIN_GCC_ARM/libcy_capsense.a
+../mtb_shared/emwin/latest-v5.X/GUI/COMPONENT_SOFTFP/COMPONENT_EMWIN_NOSNTS/TOOLCHAIN_GCC_ARM/libemWin_nosnts_gcc.a
