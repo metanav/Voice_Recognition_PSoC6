@@ -1,0 +1,6 @@
+../mtb_shared/bless/latest-v3.X/COMPONENT_BLESS_CONTROLLER/COMPONENT_CM4/COMPONENT_SOFTFP/TOOLCHAIN_GCC_ARM/cy_ble_stack_controller.a
+../mtb_shared/bless/latest-v3.X/COMPONENT_BLESS_CONTROLLER/COMPONENT_CM4/COMPONENT_SOFTFP/TOOLCHAIN_GCC_ARM/cy_ble_stack_manager.a
+../mtb_shared/bless/latest-v3.X/COMPONENT_BLESS_HOST/COMPONENT_CM4/COMPONENT_SOFTFP/TOOLCHAIN_GCC_ARM/cy_ble_stack_host.a
+../mtb_shared/capsense/latest-v2.X/COMPONENT_SOFTFP/TOOLCHAIN_GCC_ARM/libcy_capsense.a
+../mtb_shared/emwin/latest-v5.X/GUI/COMPONENT_SOFTFP/COMPONENT_EMWIN_NOSNTS/TOOLCHAIN_GCC_ARM/libemWin_nosnts_gcc.a
+./edge-impulse-sdk/third_party/arc_mli_package/bin/emsdp_em11d_em9d_dfss/release/libmli.a
