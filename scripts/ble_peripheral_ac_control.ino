@@ -45,17 +45,17 @@ class CharCallbacks: public BLECharacteristicCallbacks {
       Serial.println("onWrite called");
       std::string value = pCharacteristic->getValue();
 
-      if (value.length() > 0) {
+      if (value.length() == 3) {
         Serial.println("Command");
-        if (value == "AC_ON") {
+        if (value[0] == 0x00 && value[0] == 0x01 && value[0] == 0x01) {
           ac_on();
-        } else if (value == "AC_OFF") {
+        } else if (value[0] == 0x00 && value[0] == 0x01 && value[0] == 0x00) {
           ac_off();
 
-        } else if (value == "TEMP_UP") {
+        } else if (value[0] == 0x00 && value[0] == 0x01 && value[0] == 0x03) {
           temp_up();
 
-        } else if (value == "TEMP_DOWN") {
+        } else if (value[0] == 0x00 && value[0] == 0x01 && value[0] == 0x02) {
           temp_down();
         }
       }
