@@ -25,7 +25,7 @@
 * Function Prototypes
 ********************************************************************************/
 int  microphone_audio_signal_get_data(size_t offset, size_t length, float *out_ptr);
-void ble_write_characteristics();
+void ble_write_characteristics(uint8_t command);
 /*******************************************************************************
  * Global variables
  ******************************************************************************/
@@ -126,8 +126,8 @@ int main(void)
 				int8_t argmax = -1;
 				for (size_t ix = 0; ix < EI_CLASSIFIER_LABEL_COUNT; ix++) {
 					if (result.classification[ix].value > max_prob) {
-                        argmax = ix;
-                        max_prob = result.classification[ix].value;
+                                            argmax = ix;
+                                            max_prob = result.classification[ix].value;
 					}
 					printf("    %s: %.5f\n", result.classification[ix].label, result.classification[ix].value);
 				}
@@ -136,25 +136,16 @@ int main(void)
 				char unknown[] = "unknown";
 				if((strncmp(result.classification[argmax].label, unknown, sizeof(unknown)) == 0)
 						|| (strncmp(result.classification[argmax].label, noise, sizeof(noise)) == 0) ) {
-					//printf("    %s: %.5f\n", result.classification[argmax].label, result.classification[argmax].value);
+					printf("    %s: %.5f\n", result.classification[argmax].label, result.classification[argmax].value);
 				} else {
 					if (result.classification[argmax].value >= 0.6 ) {
 						//printf("    %s: %.5f\n", result.classification[argmax].label, result.classification[argmax].value);
 						eink_display(result.classification[argmax].label);
 						eink_update();
+						// classes (in order): { "AC_OFF", "AC_ON", "TEMP_DOWN", "TEMP_UP", "noise", "unknown" };
+						ble_write_characteristics(argmax);
 					}
 				}
-
-
-
-//				if(strncmp(result.classification[argmax].label, label, sizeof(label)) == 0) {
-//					ble_write_characteristics();
-//
-//				    eink_display(result.classification[argmax].label);
-//				    eink_update();
-//					//printf("    %s: %.5f\n", result.classification[argmax].label, result.classification[argmax].value);
-//
-//				}
 
 				print_results = 0;
 			}
@@ -169,7 +160,7 @@ int microphone_audio_signal_get_data(size_t offset, size_t length, float *out_pt
     return 0;
 }
 
-void ble_write_characteristics()
+void ble_write_characteristics(uint8_t command)
 {
 	if (!cmd_char_uuid_found)
     {
@@ -177,9 +168,9 @@ void ble_write_characteristics()
     }
 	else
     {
-        ble_write_buffer[0] = 0x79;
-        ble_write_buffer[1] = 0x65;
-        ble_write_buffer[2] = 0x73;
+        ble_write_buffer[0] = 0x00;
+        ble_write_buffer[1] = 0x01;
+        ble_write_buffer[2] = command;
 
 
         /* Send Write command to GATT Peripheral */
